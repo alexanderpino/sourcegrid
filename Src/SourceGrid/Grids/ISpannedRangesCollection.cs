@@ -42,7 +42,7 @@ namespace SourceGrid
 		
 		Range? GetFirstIntersectedRange(Position pos);
 		
-		List<Range> GetRanges(Range range);
+		List<SourceGrid.Range> GetRanges(Range range);
 		
 		/// <summary>
 		/// Returns range which has exactly the same start position

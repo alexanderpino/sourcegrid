@@ -40,13 +40,13 @@ namespace SourceGrid.Selection
             {
                 mList.Add(column);
 
-                OnSelectionChanged(new RangeRegionChangedEventArgs(Grid.Columns.GetRange(column) , Range.Empty));
+                OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(Grid.Columns.GetRange(column) , Range.Empty));
             }
             else if (!select && mList.Contains(column))
             {
                 mList.Remove(column);
 
-                OnSelectionChanged(new RangeRegionChangedEventArgs(Range.Empty, Grid.Columns.GetRange(column)));
+                OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(Range.Empty, Grid.Columns.GetRange(column)));
             } 
         }
 
@@ -95,7 +95,7 @@ namespace SourceGrid.Selection
 
             mList.Clear();
 
-            OnSelectionChanged(new RangeRegionChangedEventArgs(null, prevRange));
+            OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(null, prevRange));
         }
 
         public override bool IsEmpty()
@@ -105,13 +105,13 @@ namespace SourceGrid.Selection
 
         public override RangeRegion GetSelectionRegion()
         {
-            RangeRegion region = new RangeRegion();
+            RangeRegion region = new SourceGrid.RangeRegion();
 
             if (Grid.Rows.Count > 0)
             {
                 foreach (int col in mList)
                 {
-                    region.Add(ValidateRange(new Range(Grid.FixedRows, col, Grid.Rows.Count - 1, col)));
+                    region.Add(ValidateRange(new SourceGrid.Range(Grid.FixedRows, col, Grid.Rows.Count - 1, col)));
                 }
             }
 

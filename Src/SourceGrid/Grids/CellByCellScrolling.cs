@@ -187,7 +187,7 @@ namespace SourceGrid
                 lastRow == null || lastCol == null)
                 return Range.Empty;
 
-            return new Range(firstRow.Value, firstCol.Value,
+            return new SourceGrid.Range(firstRow.Value, firstCol.Value,
                 lastRow.Value, lastCol.Value);
         }
 
@@ -322,7 +322,7 @@ namespace SourceGrid
             if (firstCol == null || lastCol == null)
                 return Range.Empty;
 
-            return new Range(0, firstCol.Value, actualFixed - 1, lastCol.Value);
+            return new SourceGrid.Range(0, firstCol.Value, actualFixed - 1, lastCol.Value);
         }
 
         public Range GetFixedLeftRange()
@@ -340,7 +340,7 @@ namespace SourceGrid
             if (firstRow == null || lastRow == null)
                 return Range.Empty;
 
-            return new Range(firstRow.Value, 0, lastRow.Value, actualFixed - 1);
+            return new SourceGrid.Range(firstRow.Value, 0, lastRow.Value, actualFixed - 1);
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace SourceGrid
             {
                 foreach (Range rng in m_Grid.GetVisibleRegion())
                 {
-                    m_Grid.OnRangePaint(new RangePaintEventArgs(m_Grid, grCache, rng));
+                    m_Grid.OnRangePaint(new SourceGrid.RangePaintEventArgs(m_Grid, grCache, rng));
                 }
             }
         }

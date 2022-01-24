@@ -55,12 +55,12 @@ namespace SourceGrid.Selection
 				// continue with adding selection
 				mList.AddRange(rowRange);
 				this.ActivePosition = activePosition;
-				OnSelectionChanged(new RangeRegionChangedEventArgs(rowRange, Range.Empty));
+				OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(rowRange, Range.Empty));
 			} else
 				if (!select && mList.IsSelectedRow(row))
 			{
 				mList.RemoveRange(rowRange);
-				OnSelectionChanged(new RangeRegionChangedEventArgs(Range.Empty, rowRange));
+				OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(Range.Empty, rowRange));
 			}
 		}
 
@@ -87,7 +87,7 @@ namespace SourceGrid.Selection
 
 		private Range NormalizeRange(Range range)
 		{
-			return new Range(range.Start.Row, 0, range.End.Row, Grid.Columns.Count - 1);
+			return new SourceGrid.Range(range.Start.Row, 0, range.End.Row, Grid.Columns.Count - 1);
 		}
 		
 		public override void SelectRange(Range range, bool select)
@@ -96,7 +96,7 @@ namespace SourceGrid.Selection
 			if (select)
 				mList.AddRange(normalizedRange); else
 				mList.RemoveRange(normalizedRange);
-			OnSelectionChanged(new RangeRegionChangedEventArgs(normalizedRange, Range.Empty));
+			OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(normalizedRange, Range.Empty));
 		}
 
 		protected override void OnResetSelection()
@@ -105,7 +105,7 @@ namespace SourceGrid.Selection
 
 			mList.Clear();
 
-			OnSelectionChanged(new RangeRegionChangedEventArgs(null, prevRange));
+			OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(null, prevRange));
 		}
 
 		public override bool IsEmpty()
@@ -115,7 +115,7 @@ namespace SourceGrid.Selection
 
 		public override RangeRegion GetSelectionRegion()
 		{
-			RangeRegion region = new RangeRegion();
+			RangeRegion region = new SourceGrid.RangeRegion();
 
 			if (Grid.Columns.Count == 0)
 				return region;

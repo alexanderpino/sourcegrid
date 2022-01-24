@@ -149,7 +149,7 @@ namespace SourceGrid
 		/// <param name="cutMode">Cut mode. Can be used to remove the data from the source when pasting it to the destination or immediately.</param>
 		public static RangeData LoadData(GridVirtual sourceGrid, Range sourceRange, CutMode cutMode)
 		{
-			RangeData data = new RangeData(sourceGrid);
+			RangeData data = new SourceGrid.RangeData(sourceGrid);
 			//mCutMode = cutMode;
 			data.mSourceRange= sourceRange;
 			data.mSourceValues = new object[sourceRange.RowsCount, GetVisibleColumnCount(sourceGrid, sourceRange)];
@@ -201,7 +201,7 @@ namespace SourceGrid
             //chinnari.prasad@siemens.com : Cut operation is moved below the copy operation to retain the data
             if (cutMode == CutMode.CutImmediately && sourceGrid != null)
             {
-                sourceGrid.ClearValues(new RangeRegion(sourceRange), ClipboardMode.Cut);
+                sourceGrid.ClearValues(new SourceGrid.RangeRegion(sourceRange), ClipboardMode.Cut);
             }
 
 			return data;
@@ -265,7 +265,7 @@ namespace SourceGrid
 			/*int sourceRow = this.SourceValues.Length - 1;
 			int sourceColumn = this.SourceValues.Rank - 1;
 			//Calculate the destination Range merging the source range
-			var destinationRange = new Range(destinationPosition,
+			var destinationRange = new SourceGrid.Range(destinationPosition,
 			                                 new Position(destinationPosition.Row + sourceRow, destinationPosition.Column + sourceColumn));
 			Range newRange = mSourceRange;
 			newRange.MoveTo(destinationRange.Start);
@@ -323,7 +323,7 @@ namespace SourceGrid
 			string[] firstColumnsData = rowsData[0].Split('\t');
 			int cols = firstColumnsData.Length;
 
-			range = new Range(0, 0, rows - 1, cols - 1);
+			range = new SourceGrid.Range(0, 0, rows - 1, cols - 1);
 			values = new string[rows, cols];
 
 			int arrayRow = 0;
@@ -460,7 +460,7 @@ namespace SourceGrid
                 if (dtObj.GetDataPresent(System.Windows.Forms.DataFormats.UnicodeText, true))
                 {
                     string buffer = (string)dtObj.GetData(System.Windows.Forms.DataFormats.UnicodeText, true);
-                    rngData = new RangeData();
+                    rngData = new SourceGrid.RangeData();
                     rngData.LoadData(buffer);
                 }
             }

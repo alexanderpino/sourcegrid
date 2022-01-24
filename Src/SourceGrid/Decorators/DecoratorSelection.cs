@@ -76,7 +76,7 @@ namespace SourceGrid.Decorators
 	        CellContext focusContext = new CellContext(e.Grid, mSelection.ActivePosition);
 	        // get focus rectangle
 	        // clipped to visible range
-            Range focusClippedRange = dataRange.Intersect(new Range(mSelection.ActivePosition, mSelection.ActivePosition));
+            Range focusClippedRange = dataRange.Intersect(new SourceGrid.Range(mSelection.ActivePosition, mSelection.ActivePosition));
 	        System.Drawing.Rectangle focusRect = e.Grid.PositionToVisibleRectangle(focusClippedRange.Start);
 
             //sandhra.prakash@siemens.com: To support smooth scrolling. Otherwise transform will not be applied.

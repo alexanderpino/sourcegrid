@@ -254,7 +254,7 @@ namespace SourceGrid.Exporter
 		{
 			base.OnBeginPrint(e);
 			if (RangeToPrint.IsEmpty())
-				RangeToPrint = new Range(0, 0, m_Grid.Rows.Count - 1, m_Grid.Columns.Count - 1);
+				RangeToPrint = new SourceGrid.Range(0, 0, m_Grid.Rows.Count - 1, m_Grid.Columns.Count - 1);
 
 			// Force no border
 			m_CellPrintView.Border = RectangleBorder.NoBorder;
@@ -356,7 +356,7 @@ namespace SourceGrid.Exporter
 
 			List<int> columnHasTopBorder = new List<int>();
 			List<int> rowHasLeftBorder = new List<int>();
-			RangeCollection printedRanges = new RangeCollection();
+			RangeCollection printedRanges = new SourceGrid.RangeCollection();
 
 			int pageFirstRow = m_NextRowToPrint;
 			int pageFirstColumn = m_NextColumnToPrint;

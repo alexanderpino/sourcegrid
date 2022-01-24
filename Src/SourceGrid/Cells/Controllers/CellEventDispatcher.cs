@@ -157,7 +157,7 @@ namespace SourceGrid.Cells.Controllers
             base.OnEditStarted(sender, e);
 
             if (sender.Cell != null && sender.Cell.Controller != null)
-                sender.Cell.Controller.OnEditStarted(sender, e);
+				sender.Cell.Controller.OnEditStarted(sender, e);
         }
 
         public override void OnValueChanging(CellContext sender, ValueChangeEventArgs e)
@@ -165,7 +165,7 @@ namespace SourceGrid.Cells.Controllers
             base.OnValueChanging(sender, e);
 
             if (sender.Cell != null && sender.Cell.Controller != null)
-                sender.Cell.Controller.OnValueChanging(sender, e);
+				sender.Cell.Controller.OnValueChanging(sender, e);
         }
 
 		public override void OnFocusEntering(CellContext sender, System.ComponentModel.CancelEventArgs e)
@@ -173,7 +173,7 @@ namespace SourceGrid.Cells.Controllers
 			base.OnFocusEntering (sender, e);
 
 			if (sender.Cell != null && sender.Cell.Controller != null)
-				sender.Cell.Controller.OnFocusEntering(sender, e);
+                sender.Cell.Controller.OnFocusEntering(sender, e);
 		}
 
 		public override void OnFocusLeaving(CellContext sender, System.ComponentModel.CancelEventArgs e)

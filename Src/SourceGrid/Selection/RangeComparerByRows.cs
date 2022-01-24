@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace SourceGrid.Selection
 {
-	public class RangeComparerByRows : IComparer<Range>
+	public class RangeComparerByRows : IComparer<SourceGrid.Range>
 	{
 		public int Compare(Range x, Range y)
 		{

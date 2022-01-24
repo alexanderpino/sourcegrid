@@ -63,7 +63,7 @@ namespace SourceGrid
 			FixedRows = 1;
 			FixedColumns = 0;
 
-			Controller.AddController(new DataGridCellController());
+            Controller.AddController(new DataGridCellController());
 
 			SelectionMode = GridSelectionMode.Row;
 		}

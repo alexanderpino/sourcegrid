@@ -8,13 +8,13 @@ namespace SourceGrid
 	/// Uses simple iterating over list to find
 	/// required range
 	/// </summary>
-public class SpannedRangesList: List<Range>, ISpannedRangesCollection
+public class SpannedRangesList: List<SourceGrid.Range>, ISpannedRangesCollection
 	{
 		public void Update(Range oldRange, Range newRange)
 		{
 			int index = base.IndexOf(oldRange);
 			if (index <0 )
-				throw new RangeNotFoundException();
+				throw new SourceGrid.RangeNotFoundException();
 			this[index] = newRange;
 		}
 		
@@ -27,7 +27,7 @@ public class SpannedRangesList: List<Range>, ISpannedRangesCollection
 		{
 			int index = base.IndexOf(range);
 			if (index < 0)
-				throw new RangeNotFoundException();
+				throw new SourceGrid.RangeNotFoundException();
 			base.RemoveAt(index);
 		}
 		
@@ -47,9 +47,9 @@ public class SpannedRangesList: List<Range>, ISpannedRangesCollection
 			return null;
 		}
 		
-		public List<Range> GetRanges(Range range)
+		public List<SourceGrid.Range> GetRanges(Range range)
 		{
-			var result = new List<Range>();
+			var result = new List<SourceGrid.Range>();
 			for (int i = 0; i < this.Count; i++)
 			{
 				var r = this[i];

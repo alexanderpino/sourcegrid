@@ -115,7 +115,7 @@ namespace SourceGrid
 				if (m_Grid == null)
 					throw new SourceGridException("Invalid Grid object");
 	
-				return new Range(0, Index, Grid.Rows.Count - 1, Index);
+				return new SourceGrid.Range(0, Index, Grid.Rows.Count - 1, Index);
 			}
 		}
 	

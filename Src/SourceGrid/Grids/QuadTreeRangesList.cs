@@ -60,7 +60,7 @@ namespace SourceGrid
 		{
 			var range = base.QueryFirst(oldRange.Start);
 			if (range == null)
-				throw new RangeNotFoundException();
+				throw new SourceGrid.RangeNotFoundException();
 			Remove(oldRange);
 			Insert(newRange);
 		}
@@ -70,7 +70,7 @@ namespace SourceGrid
 			base.Insert(range);
 		}
 		
-		public System.Collections.Generic.List<Range> GetRanges(Range range)
+		public System.Collections.Generic.List<SourceGrid.Range> GetRanges(Range range)
 		{
 			return base.Query(range);
 		}

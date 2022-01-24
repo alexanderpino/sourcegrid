@@ -100,7 +100,7 @@ namespace SourceGrid
 				if (m_Grid == null)
 					throw new SourceGridException("Invalid Grid object");
 	
-				return new Range(Index, 0, Index, Grid.Columns.Count - 1);
+				return new SourceGrid.Range(Index, 0, Index, Grid.Columns.Count - 1);
 			}
 		}
 		private object m_Tag;

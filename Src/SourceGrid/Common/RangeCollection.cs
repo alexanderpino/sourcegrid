@@ -7,7 +7,7 @@ namespace SourceGrid
 	/// A collection of elements of type Range
 	/// </summary>
 	[Serializable]
-	public class RangeCollection : List<Range>
+	public class RangeCollection : List<SourceGrid.Range>
 	{
 		/// <summary>
 		/// Returns true if the specified cell position is present in any range in the current collection.

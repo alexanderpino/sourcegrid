@@ -370,7 +370,7 @@ namespace SourceGrid
 
         private void EnsureNoSpannedCellsExist(int row, int col, Cells.ICell p_cell)
         {
-            var spanRange = new Range(row, col, row + p_cell.RowSpan - 1, col + p_cell.ColumnSpan - 1);
+            var spanRange = new SourceGrid.Range(row, col, row + p_cell.RowSpan - 1, col + p_cell.ColumnSpan - 1);
             var ranges = spannedCellReferences.SpannedRangesCollection.GetRanges(
                 spanRange);
             if (ranges.Count == 0)
@@ -623,7 +623,7 @@ namespace SourceGrid
                     var p = new Position(y2, x2);
                     Range range2 = PositionToCellRange(p);
                     if (range2.IsEmpty())
-                        range2 = new Range(p, p);
+                        range2 = new SourceGrid.Range(p, p);
                     if (range2.Start.Column < x)
                         x = range2.Start.Column;
                     if (range2.End.Column > x1)
@@ -635,7 +635,7 @@ namespace SourceGrid
                         y1 = range2.End.Row;
                 }
             }
-            return new Range(y, x, y1, x1);
+            return new SourceGrid.Range(y, x, y1, x1);
         }
 
         /// <summary>
@@ -687,7 +687,7 @@ namespace SourceGrid
         /// <summary>
         /// List of the ranges already drawn
         /// </summary>
-        private RangeCollection mDrawnRange = new RangeCollection();
+        private RangeCollection mDrawnRange = new SourceGrid.RangeCollection();
         
         internal override void OnRangePaint(RangePaintEventArgs e)
         {

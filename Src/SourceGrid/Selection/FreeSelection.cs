@@ -12,7 +12,7 @@ namespace SourceGrid.Selection
 	/// </summary>
 	public class RangeMergerByCells
 	{
-		private List<Range> m_ranges = new List<Range>();
+		private List<SourceGrid.Range> m_ranges = new List<SourceGrid.Range>();
 		
 		private bool IntersectWithCurrentRangesRecursive(RangeRegion rangeRegionToIntersect)
 		{
@@ -22,7 +22,7 @@ namespace SourceGrid.Selection
 				RangeRegion excludedResults = null;
 				Range remove = Range.Empty;
 				bool excluded = false;
-				// loop through our new ranges
+				// loop through our new SourceGrid.Ranges
 				foreach (Range rangeToIntersect in rangeRegionToIntersect)
 				{
 					// if we intersect with at least one range
@@ -57,7 +57,7 @@ namespace SourceGrid.Selection
 		
 		public RangeMergerByCells AddRange(Range rangeToAdd)
 		{
-			RangeRegion rangeRegionToAdd = IntersectWithCurrentRanges(new RangeRegion(rangeToAdd));
+			RangeRegion rangeRegionToAdd = IntersectWithCurrentRanges(new SourceGrid.RangeRegion(rangeToAdd));
 			foreach (Range range in rangeRegionToAdd)
 			{
 				m_ranges.Add(range);
@@ -89,7 +89,7 @@ namespace SourceGrid.Selection
 		/// <returns>true, if at least two ranges were joined into single</returns>
 		private bool JoinAdjancedRecursive()
 		{
-			List<Range> cloneRanges = new List<Range>(m_ranges);
+			List<SourceGrid.Range> cloneRanges = new List<SourceGrid.Range>(m_ranges);
 			foreach (Range clonedRange in cloneRanges)
 			{
 				foreach (Range rangeToTest in m_ranges)
@@ -122,7 +122,7 @@ namespace SourceGrid.Selection
 			return false;
 		}
 		
-		public List<Range> GetSelectedRowRegions()
+		public List<SourceGrid.Range> GetSelectedRowRegions()
 		{
 			return m_ranges;
 		}
@@ -133,7 +133,7 @@ namespace SourceGrid.Selection
 	/// </summary>
 	public class FreeSelection : SelectionBase
 	{
-		private RangeRegion mRegion = new RangeRegion();
+		private RangeRegion mRegion = new SourceGrid.RangeRegion();
 
 		public FreeSelection()
 		{
@@ -225,7 +225,7 @@ namespace SourceGrid.Selection
 		/// <returns></returns>
 		public override RangeRegion GetSelectionRegion()
 		{
-			return new RangeRegion(mRegion);
+			return new SourceGrid.RangeRegion(mRegion);
 		}
 
 		/// <summary>

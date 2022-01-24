@@ -97,7 +97,7 @@ namespace SourceGrid
 				return;
 
 			System.ComponentModel.CancelEventArgs cancelEventArgs = new System.ComponentModel.CancelEventArgs();
-			Grid.Controller.OnEditStarting(this, cancelEventArgs);
+            Grid.Controller.OnEditStarting(this, cancelEventArgs);
 			if (cancelEventArgs.Cancel == false)
 			{
 				Cell.Editor.InternalStartEdit(this);

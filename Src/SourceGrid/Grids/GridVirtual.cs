@@ -289,7 +289,7 @@ namespace SourceGrid
                 mDragCellPosition = Position.Empty;
 
             //If the selection contains some invalid cells reset the selection state.
-            RangeRegion completeRegion = new RangeRegion(complete);
+            RangeRegion completeRegion = new SourceGrid.RangeRegion(complete);
             if (
                 (Selection.ActivePosition.IsEmpty() == false && complete.Contains(Selection.ActivePosition) == false) ||
                 (Selection.IsEmpty() == false && completeRegion.Contains(Selection.GetSelectionRegion()) == false)
@@ -456,7 +456,7 @@ namespace SourceGrid
             {
                 if (ActualFixedRows > 0 && Rows.Count >= ActualFixedRows &&
                     ActualFixedColumns > 0 && Columns.Count >= ActualFixedColumns)
-                    return new Range(0, 0, ActualFixedRows - 1, ActualFixedColumns - 1);
+                    return new SourceGrid.Range(0, 0, ActualFixedRows - 1, ActualFixedColumns - 1);
                 else
                     return Range.Empty;
             }
@@ -485,7 +485,7 @@ namespace SourceGrid
                 int firstCol = HeaderColumnCount;
                 int lastCol = Columns.Count - 1;
 
-                return new Range(firstRow, firstCol,
+                return new SourceGrid.Range(firstRow, firstCol,
                                  lastRow, lastCol);
             }
             else
@@ -518,7 +518,7 @@ namespace SourceGrid
         /// Get the visible ranges. Returns a list of Range, one for each area.
         /// </summary>
         /// <returns></returns>
-        internal IEnumerable<Range> GetVisibleRegion()
+        internal IEnumerable<SourceGrid.Range> GetVisibleRegion()
         {
             Range rng;
 
@@ -892,7 +892,7 @@ namespace SourceGrid
         /// <param name="position"></param>
         public virtual void InvalidateCell(Position position)
         {
-            InvalidateRange(new Range(position));
+            InvalidateRange(new SourceGrid.Range(position));
         }
 
         /// <summary>
@@ -942,7 +942,7 @@ namespace SourceGrid
             {
                 int startRow = range.Start.Row > 0 ? range.Start.Row - 1 : 0;
                 int startCol = range.Start.Column > 0 ? range.Start.Column - 1 : 0;
-                range = new Range(
+                range = new SourceGrid.Range(
                     new Position(startRow, startCol),
                     range.End);
             }
@@ -1046,7 +1046,7 @@ namespace SourceGrid
         /// <returns></returns>
         public virtual Range RangeToCellRange(Range range)
         {
-            return new Range(range.Start, range.End);
+            return new SourceGrid.Range(range.Start, range.End);
         }
 
         /// <summary>
@@ -1078,8 +1078,8 @@ namespace SourceGrid
             if (l_Cell == null)
                 return Range.Empty;
             else
-                return new Range(pPosition);
-            //return new Range(pPosition);
+                return new SourceGrid.Range(pPosition);
+            //return new SourceGrid.Range(pPosition);
         }
         #endregion
 
@@ -1284,9 +1284,9 @@ namespace SourceGrid
         {
             Range l_MouseRange = MouseSelectionRange;
 
-            OnUndoMouseSelection(new RangeEventArgs(m_OldMouseSelectionRange));
+            OnUndoMouseSelection(new SourceGrid.RangeEventArgs(m_OldMouseSelectionRange));
 
-            OnApplyMouseSelection(new RangeEventArgs(l_MouseRange));
+            OnApplyMouseSelection(new SourceGrid.RangeEventArgs(l_MouseRange));
 
             m_OldMouseSelectionRange = l_MouseRange;
         }
@@ -1297,7 +1297,7 @@ namespace SourceGrid
         public void MouseSelectionFinish()
         {
             if (m_MouseSelectionRange != Range.Empty)
-                OnMouseSelectionFinish(new RangeEventArgs(m_OldMouseSelectionRange));
+                OnMouseSelectionFinish(new SourceGrid.RangeEventArgs(m_OldMouseSelectionRange));
 
             m_MouseSelectionRange = Range.Empty;
         }
@@ -1308,7 +1308,7 @@ namespace SourceGrid
         /// <param name="p_Corner"></param>
         public virtual void ChangeMouseSelectionCorner(Position p_Corner)
         {
-            Range newMouseSelection = new Range(Selection.ActivePosition, p_Corner);
+            Range newMouseSelection = new SourceGrid.Range(Selection.ActivePosition, p_Corner);
 
             bool l_bChange = false;
             if (m_MouseSelectionRange != newMouseSelection)
@@ -1587,13 +1587,13 @@ namespace SourceGrid
                     Selection.ResetSelection(true);
                 }
                 //chinnari.prasad@siemens.com : Sending the correct range
-                Selection.SelectRange(new Range(m_firstCellShiftSelected, Selection.ActivePosition), true);
+                Selection.SelectRange(new SourceGrid.Range(m_firstCellShiftSelected, Selection.ActivePosition), true);
             }
 
             #endregion
 
             #region Clipboard
-            RangeRegion selRegion = (ClipboardUseOnlyActivePosition ? new RangeRegion(Selection.ActivePosition) : Selection.GetSelectionRegion());
+            RangeRegion selRegion = (ClipboardUseOnlyActivePosition ? new SourceGrid.RangeRegion(Selection.ActivePosition) : Selection.GetSelectionRegion());
 
             //Paste
             if (e.Control && e.KeyCode == Keys.V)
@@ -1700,7 +1700,7 @@ namespace SourceGrid
                 return;
             Range rng = selRegion[0];
             Range data = rngData.SourceRange;
-            Range destinationRange = new Range(
+            Range destinationRange = new SourceGrid.Range(
                 new Position(rng.Start.Row, rng.Start.Column),
                 new Position(rng.Start.Row + (data.End.Row - data.Start.Row),
                              rng.Start.Column + (data.End.Column - data.Start.Column)));
@@ -2028,7 +2028,7 @@ namespace SourceGrid
 
                     //Cell.OnMouseDown
                     CellContext cellContext = new CellContext(this, position, cellMouseDown);
-                    
+
                     Controller.OnMouseDown(cellContext, e);
                 }
             }
@@ -2735,7 +2735,7 @@ namespace SourceGrid
             get
             {
                 if (Rows.Count > 0 && Columns.Count > 0)
-                    return new Range(0, 0, Rows.Count - 1, Columns.Count - 1);
+                    return new SourceGrid.Range(0, 0, Rows.Count - 1, Columns.Count - 1);
                 else
                     return Range.Empty;
             }

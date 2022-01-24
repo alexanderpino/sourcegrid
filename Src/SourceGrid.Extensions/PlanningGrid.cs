@@ -78,7 +78,7 @@ namespace SourceGrid.Planning
         {
             base.OnLoad(e);
 
-            grid.Controller.AddController(new AppointmentController(this));
+            Grid.Controller.AddController(new AppointmentController(this));
         }
 
 		private DateTime m_DateTimeStart;
@@ -225,8 +225,8 @@ namespace SourceGrid.Planning
 								{
 									appointmentCell = new CellAppointment(m_Appointments[i]);
 									appointmentCell.View = m_Appointments[i].View;
-									if (m_Appointments[i].Controller != null)
-										appointmentCell.AddController(m_Appointments[i].Controller);
+									if (Grid.Controller != null)
+										appointmentCell.AddController(Grid.Controller);
 									grid[rs,c] = appointmentCell;
 									indexAppointment = i;
 								}

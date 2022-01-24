@@ -22,7 +22,7 @@ namespace SourceGrid.Selection
 	/// </summary>
 	public class RangeMergerByRows
 	{
-		private List<Range> m_ranges = new List<Range>();
+		private List<SourceGrid.Range> m_ranges = new List<SourceGrid.Range>();
 		private int m_columnStart = 0;
 		private int m_columnEnd = 0;
 		
@@ -49,7 +49,7 @@ namespace SourceGrid.Selection
 		/// from lowest row to highest.
 		/// </summary>
 		/// <returns></returns>
-		public IEnumerable<Range> LoopAllRanges()
+		public IEnumerable<SourceGrid.Range> LoopAllRanges()
 		{
 			foreach (var row in m_ranges)
 			{
@@ -63,14 +63,14 @@ namespace SourceGrid.Selection
 		/// <param name="startColumn">start column, usually 0</param>
 		/// <param name="endColumn">end column, usually equals to column count - 1</param>
 		/// <returns></returns>
-		public List<Range> GetSelectedRowRegions(int startColumn, int endColumn)
+		public List<SourceGrid.Range> GetSelectedRowRegions(int startColumn, int endColumn)
 		{
 			if (startColumn > endColumn)
 				throw new ArgumentException("end column can not be less than startColumn");
-			List<Range> ranges = new List<Range>();
+			List<SourceGrid.Range> ranges = new List<SourceGrid.Range>();
 			foreach (Range range in m_ranges)
 			{
-				ranges.Add(new Range(range.Start.Row, startColumn, range.End.Row, endColumn));
+				ranges.Add(new SourceGrid.Range(range.Start.Row, startColumn, range.End.Row, endColumn));
 			}
 			return ranges;
 		}
@@ -124,7 +124,7 @@ namespace SourceGrid.Selection
 				Range second = m_ranges[i+1];
 				if (first.End.Row + 1 >= second.Start.Row)
 				{
-					Range newRange = new Range(first.Start.Row, m_columnStart,
+					Range newRange = new SourceGrid.Range(first.Start.Row, m_columnStart,
 					                           second.End.Row, m_columnEnd);
 					m_ranges.Remove(first);
 					m_ranges.Remove(second);
@@ -144,7 +144,7 @@ namespace SourceGrid.Selection
 		
 		private Range NormalizeRange(Range rangeToNormalize)
 		{
-			return new Range(rangeToNormalize.Start.Row, m_columnStart,
+			return new SourceGrid.Range(rangeToNormalize.Start.Row, m_columnStart,
 			                 rangeToNormalize.End.Row, m_columnEnd);
 		}
 		
@@ -168,7 +168,7 @@ namespace SourceGrid.Selection
 		}
 		
 		/// <summary>
-		/// Returns new range witch is the max of both ranges in row axis
+		/// Returns new SourceGrid.Range witch is the max of both ranges in row axis
 		/// </summary>
 		/// <param name="first"></param>
 		/// <param name="second"></param>
@@ -182,7 +182,7 @@ namespace SourceGrid.Selection
 			int x1 = first.End.Row;
 			if (x1 < second.End.Row)
 				x1 = second.End.Row;
-			return new Range(x, m_columnStart, x1, m_columnEnd);
+			return new SourceGrid.Range(x, m_columnStart, x1, m_columnEnd);
 		}
 		
 		private bool RemoveRangeRecursive(Range rangeToRemove)

@@ -159,7 +159,7 @@ namespace SourceGrid.Cells
 
 				int col = Column.Index;
 				int row = Row.Index;
-				return new Range(row, col,
+				return new SourceGrid.Range(row, col,
 				                 row + RowSpan - 1, col + ColumnSpan - 1);
 			}
 		}

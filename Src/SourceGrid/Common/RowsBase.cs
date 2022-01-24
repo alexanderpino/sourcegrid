@@ -291,7 +291,7 @@ namespace SourceGrid
 		
 		public Range GetRange(int row)
 		{
-			return new Range(row, 0, row, Grid.Columns.Count-1);
+			return new SourceGrid.Range(row, 0, row, Grid.Columns.Count-1);
 		}
 		
 		#region Layout

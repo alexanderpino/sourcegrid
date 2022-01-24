@@ -20,13 +20,13 @@ namespace SourceGrid
 		
 		public static Range FromPosition(Position startPosition)
 		{
-			return new Range(startPosition);
+			return new SourceGrid.Range(startPosition);
 		}
 
 		
 		public static Range From(Position startPosition, int rowCount, int colCount)
 		{
-			var range = new Range(startPosition);
+			var range = new SourceGrid.Range(startPosition);
 			range.RowsCount = rowCount;
 			range.ColumnsCount = colCount;
 			return range;
@@ -58,7 +58,7 @@ namespace SourceGrid
 
 		static Range()
 		{
-			Empty = new Range(Position.Empty, Position.Empty, false);
+			Empty = new SourceGrid.Range(Position.Empty, Position.Empty, false);
 		}
 
 		private Position m_Start, m_End;
@@ -303,7 +303,7 @@ namespace SourceGrid
 		/// <returns></returns>
 		public static RangeRegion Union(Range p_Range1, Range p_Range2)
 		{
-			RangeRegion range = new RangeRegion();
+			RangeRegion range = new SourceGrid.RangeRegion();
 			range.Add(p_Range1);
 			range.Add(p_Range2);
 			return range;
@@ -322,7 +322,7 @@ namespace SourceGrid
 			else if (p_Range2.IsEmpty())
 				return p_Range1;
 			else
-				return new Range(Position.Min(p_Range1.Start, p_Range2.Start),
+				return new SourceGrid.Range(Position.Min(p_Range1.Start, p_Range2.Start),
 					Position.Max(p_Range1.End, p_Range2.End), false);
 		}
 
@@ -344,7 +344,7 @@ namespace SourceGrid
 				startNew.Row > endNew.Row)
 				return Range.Empty;
 			else
-				return new Range(startNew, endNew, false);
+				return new SourceGrid.Range(startNew, endNew, false);
 		}
 
 		/// <summary>
@@ -392,51 +392,51 @@ namespace SourceGrid
 			Range intersection = Intersect(range);
 			if (intersection.IsEmpty())
 			{
-				excluded = new RangeRegion(this);
+				excluded = new SourceGrid.RangeRegion(this);
 			}
 			else
 			{
-				excluded = new RangeRegion();
+				excluded = new SourceGrid.RangeRegion();
 
 				//Top Left
 				if (this.Start.Row < intersection.Start.Row && 
 					this.Start.Column < intersection.Start.Column)
-					excluded.Add( new Range(this.Start.Row, this.Start.Column, intersection.Start.Row - 1, intersection.Start.Column - 1) );
+					excluded.Add( new SourceGrid.Range(this.Start.Row, this.Start.Column, intersection.Start.Row - 1, intersection.Start.Column - 1) );
 
 				//Top
 				if (this.Start.Row < intersection.Start.Row)
-					excluded.Add( new Range(this.Start.Row, intersection.Start.Column, intersection.Start.Row - 1, intersection.End.Column) );
+					excluded.Add( new SourceGrid.Range(this.Start.Row, intersection.Start.Column, intersection.Start.Row - 1, intersection.End.Column) );
 
 				//Top Right
 				if (this.Start.Row < intersection.Start.Row && 
 					this.End.Column > intersection.End.Column)
-					excluded.Add( new Range(this.Start.Row, intersection.End.Column + 1, intersection.Start.Row -1, this.End.Column) );
+					excluded.Add( new SourceGrid.Range(this.Start.Row, intersection.End.Column + 1, intersection.Start.Row -1, this.End.Column) );
 
 				//----------
 
 				//Left
 				if (this.Start.Column < intersection.Start.Column)
-					excluded.Add( new Range(intersection.Start.Row, this.Start.Column, intersection.End.Row, intersection.Start.Column -1) );
+					excluded.Add( new SourceGrid.Range(intersection.Start.Row, this.Start.Column, intersection.End.Row, intersection.Start.Column -1) );
 
 				//Right
 				if (this.End.Column > intersection.End.Column)
-					excluded.Add( new Range(intersection.Start.Row, intersection.End.Column + 1, intersection.End.Row, this.End.Column) );
+					excluded.Add( new SourceGrid.Range(intersection.Start.Row, intersection.End.Column + 1, intersection.End.Row, this.End.Column) );
 
 				//--------
 
 				//Bottom Left
 				if (this.End.Row > intersection.End.Row &&
 					this.Start.Column < intersection.Start.Column)
-					excluded.Add( new Range(intersection.End.Row + 1, this.Start.Column, this.End.Row, intersection.Start.Column - 1) );
+					excluded.Add( new SourceGrid.Range(intersection.End.Row + 1, this.Start.Column, this.End.Row, intersection.Start.Column - 1) );
 
 				//Bottom
 				if (this.End.Row > intersection.End.Row)
-					excluded.Add( new Range(intersection.End.Row + 1, intersection.Start.Column, this.End.Row, intersection.End.Column) );
+					excluded.Add( new SourceGrid.Range(intersection.End.Row + 1, intersection.Start.Column, this.End.Row, intersection.End.Column) );
 
 				//Bottom Right
 				if (this.End.Row > intersection.End.Row &&
 					this.End.Column > intersection.End.Column)
-					excluded.Add( new Range(intersection.End.Row + 1, intersection.End.Column + 1, this.End.Row, this.End.Column) );
+					excluded.Add( new SourceGrid.Range(intersection.End.Row + 1, intersection.End.Column + 1, this.End.Row, this.End.Column) );
 			}
 
 			return excluded;
@@ -498,7 +498,7 @@ namespace SourceGrid
 		public Range GetRange(GridVirtual p_Grid)
 		{
 			if (p_Grid.Rows.Count>=p_Grid.FixedRows)
-				return new Range(p_Grid.FixedRows,0,p_Grid.Rows.Count-1,p_Grid.Columns.Count-1);
+				return new SourceGrid.Range(p_Grid.FixedRows,0,p_Grid.Rows.Count-1,p_Grid.Columns.Count-1);
 			else
 				return Range.Empty;
 		}
@@ -523,7 +523,7 @@ namespace SourceGrid
 		public Range GetRange(GridVirtual p_Grid)
 		{
 			if (p_Grid.Columns.Count >= p_Grid.FixedColumns)
-				return new Range(0,p_Grid.FixedColumns,p_Grid.Rows.Count-1, p_Grid.Columns.Count-1);
+				return new SourceGrid.Range(0,p_Grid.FixedColumns,p_Grid.Rows.Count-1, p_Grid.Columns.Count-1);
 			else
 				return Range.Empty;
 		}
@@ -550,7 +550,7 @@ namespace SourceGrid
 		public Range GetRange(GridVirtual p_Grid)
 		{
 			if (p_Grid.Rows.Count>=p_Grid.FixedRows)
-				return new Range(0,0,p_Grid.FixedRows,p_Grid.Columns.Count-1);
+				return new SourceGrid.Range(0,0,p_Grid.FixedRows,p_Grid.Columns.Count-1);
 			else
 				return Range.Empty;
 		}
@@ -575,7 +575,7 @@ namespace SourceGrid
 		public Range GetRange(GridVirtual p_Grid)
 		{
 			if (p_Grid.Columns.Count >= p_Grid.FixedColumns)
-				return new Range(0, 0, p_Grid.Rows.Count-1, p_Grid.FixedColumns);
+				return new SourceGrid.Range(0, 0, p_Grid.Rows.Count-1, p_Grid.FixedColumns);
 			else
 				return Range.Empty;
 		}

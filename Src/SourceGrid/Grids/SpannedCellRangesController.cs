@@ -122,7 +122,7 @@ namespace SourceGrid
 			{
 				if (range.Start.Column <= startIndex)
 					continue;
-				var newRange = new Range(range.Start.Row, range.Start.Column - moveCount,
+				var newRange = new SourceGrid.Range(range.Start.Row, range.Start.Column - moveCount,
 				                         range.End.Row, range.End.Column - moveCount);
 				this.SpannedRangesCollection.Update(range, newRange);
 			}
@@ -134,7 +134,7 @@ namespace SourceGrid
 			{
 				if (range.Start.Row <= startIndex)
 					continue;
-				var newRange = new Range(range.Start.Row - moveCount, range.Start.Column,
+				var newRange = new SourceGrid.Range(range.Start.Row - moveCount, range.Start.Column,
 				                         range.End.Row - moveCount, range.End.Column);
 				this.SpannedRangesCollection.Update(range, newRange);
 			}
@@ -142,8 +142,8 @@ namespace SourceGrid
 		
 		public void Swap(int rowIndex1, int rowIndex2)
 		{
-			var wholeGrid = new Range(rowIndex1, 0, rowIndex1, int.MaxValue);
-			var wholeGrid2 = new Range(rowIndex2, 0, rowIndex2, int.MaxValue);
+			var wholeGrid = new SourceGrid.Range(rowIndex1, 0, rowIndex1, int.MaxValue);
+			var wholeGrid2 = new SourceGrid.Range(rowIndex2, 0, rowIndex2, int.MaxValue);
 			
 			var firstRanes = this.SpannedRangesCollection.GetRanges(wholeGrid);
 			var secondRanges = this.SpannedRangesCollection.GetRanges(wholeGrid2);
@@ -152,7 +152,7 @@ namespace SourceGrid
 			{
 				if (rangineInFirst.RowsCount > 1)
 					throw new SourceGridException("Can not swap rows if they contain spanned ranged which extend more than one row");
-				var newRange = new Range(rowIndex2, rangineInFirst.Start.Column, rowIndex2, rangineInFirst.End.Column);
+				var newRange = new SourceGrid.Range(rowIndex2, rangineInFirst.Start.Column, rowIndex2, rangineInFirst.End.Column);
 				this.SpannedRangesCollection.Update(rangineInFirst, newRange);
 			}
 			
@@ -160,7 +160,7 @@ namespace SourceGrid
 			{
 				if (rangesInSecond.RowsCount > 1)
 					throw new SourceGridException("Can not swap rows if they contain spanned ranged which extend more than one row");
-				var newRange = new Range(rowIndex1, rangesInSecond.Start.Column, rowIndex1, rangesInSecond.End.Column);
+				var newRange = new SourceGrid.Range(rowIndex1, rangesInSecond.Start.Column, rowIndex1, rangesInSecond.End.Column);
 				this.SpannedRangesCollection.Update(rangesInSecond, newRange);
 			}
 		}
@@ -172,7 +172,7 @@ namespace SourceGrid
 			{
 				if (range.Start.Row < startIndex)
 					continue;
-				var newRange = new Range(range.Start.Row + moveCount, range.Start.Column,
+				var newRange = new SourceGrid.Range(range.Start.Row + moveCount, range.Start.Column,
 				                         range.End.Row + moveCount, range.End.Column);
 				this.SpannedRangesCollection.Update(range, newRange);
 			}
@@ -184,7 +184,7 @@ namespace SourceGrid
 			{
 				if (range.Start.Column < startIndex)
 					continue;
-				var newRange = new Range(range.Start.Row, range.Start.Column + moveCount,
+				var newRange = new SourceGrid.Range(range.Start.Row, range.Start.Column + moveCount,
 				                         range.End.Row, range.End.Column + moveCount);
 				this.SpannedRangesCollection.Update(range, newRange);
 			}
@@ -249,7 +249,7 @@ namespace SourceGrid
 		{
 			const int startCol = 0;
 			const int endCol = 1000;
-			var removeRange = new Range(startIndex, startCol, startIndex + count - 1, endCol);
+			var removeRange = new SourceGrid.Range(startIndex, startCol, startIndex + count - 1, endCol);
 			foreach (var range in this.SpannedRangesCollection.ToArray())
 			{
 				var intersection = range.Intersect(removeRange);
@@ -273,7 +273,7 @@ namespace SourceGrid
 		{
 			const int startRow = 0;
 			const int endRow = 1000;
-			var removeRange = new Range(startRow, startIndex, endRow, startIndex + count - 1);
+			var removeRange = new SourceGrid.Range(startRow, startIndex, endRow, startIndex + count - 1);
 			foreach (var range in this.SpannedRangesCollection.ToArray())
 			{
 				var intersection = range.Intersect(removeRange);

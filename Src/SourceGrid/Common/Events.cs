@@ -557,9 +557,9 @@ namespace SourceGrid
 		public RangeRegionChangedEventArgs(Range addedRange, Range removedRange)
 		{
 			if (addedRange.IsEmpty() == false)
-				this.addedRange = new RangeRegion(addedRange);
+				this.addedRange = new SourceGrid.RangeRegion(addedRange);
 			if (removedRange.IsEmpty() == false)
-				this.removedRange = new RangeRegion(removedRange);
+				this.removedRange = new SourceGrid.RangeRegion(removedRange);
 		}
 
 		/// <summary>

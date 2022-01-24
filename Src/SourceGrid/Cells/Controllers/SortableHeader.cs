@@ -137,13 +137,13 @@ namespace SourceGrid.Cells.Controllers
 					l_RangeToSort = m_RangeToSort.GetRange(sender.Grid);
 				else
 					//the range to sort is all the grid range without the rows < of the current row
-					l_RangeToSort = new Range(sender.Position.Row+1, 0, sender.Grid.Rows.Count - 1, sender.Grid.Columns.Count - 1);
+					l_RangeToSort = new SourceGrid.Range(sender.Position.Row+1, 0, sender.Grid.Rows.Count - 1, sender.Grid.Columns.Count - 1);
 
 				if (m_HeaderRange != null)
 					l_RangeHeader = m_HeaderRange.GetRange(sender.Grid);
 				else
 					//the range header is all the grid range with the rows <= of the current row
-					l_RangeHeader = new Range(0, 0, sender.Position.Row, sender.Grid.Columns.Count - 1);
+					l_RangeHeader = new SourceGrid.Range(0, 0, sender.Position.Row, sender.Grid.Columns.Count - 1);
 
 				Models.ISortableHeader modelSortable = (Models.ISortableHeader)sender.Cell.Model.FindModel(typeof(Models.ISortableHeader));
 

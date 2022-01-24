@@ -8,7 +8,7 @@ namespace SourceGrid
 	/// RangeRegion is a collection of range that are never overlying each other.
 	/// </summary>
 	[Serializable]
-	public class RangeRegion : ICollection<Range>
+	public class RangeRegion : ICollection<SourceGrid.Range>
 	{
 		#region Constructors
 		public RangeRegion()
@@ -17,7 +17,7 @@ namespace SourceGrid
 		public RangeRegion(Position position)
 		{
 			if (position.IsEmpty() == false)
-				m_RangeCollection.Add(new Range(position));
+				m_RangeCollection.Add(new SourceGrid.Range(position));
 		}
 		public RangeRegion(Range range)
 		{
@@ -37,7 +37,7 @@ namespace SourceGrid
 		//N.B. Il codice di questa classe è scritto in maniera tale da non avere mai sovrapposizioni.
 		// Quindi una cella potrà essere contenuta in un solo range.
 		// Nel caso vengano inseririti range sovrapposti questi vengono spezzati e reinseriti.
-		private RangeCollection m_RangeCollection = new RangeCollection();
+		private RangeCollection m_RangeCollection = new SourceGrid.RangeCollection();
 
 		#region IsEmpty
 		public virtual bool IsEmpty()
@@ -253,7 +253,7 @@ namespace SourceGrid
 		/// <returns></returns>
 		public virtual RangeRegion Intersect(Range p_Range)
 		{
-			RangeRegion range = new RangeRegion();
+			RangeRegion range = new SourceGrid.RangeRegion();
 
 			if (p_Range.IsEmpty() == false && IsEmpty() == false)
 			{
@@ -270,7 +270,7 @@ namespace SourceGrid
 		}
 		public RangeRegion Intersect(RangeRegion pRange)
 		{
-			RangeRegion ret = new RangeRegion();
+			RangeRegion ret = new SourceGrid.RangeRegion();
 			for (int rToCheck = 0; rToCheck < pRange.m_RangeCollection.Count; rToCheck++)
 			{
 				Range rangeToCheck = pRange.m_RangeCollection[rToCheck];
@@ -290,7 +290,7 @@ namespace SourceGrid
 		/// <returns></returns>
 		public RangeRegion Exclude(Range pRange)
 		{
-			RangeRegion range = new RangeRegion();
+			RangeRegion range = new SourceGrid.RangeRegion();
 
 			for (int i = 0; i < m_RangeCollection.Count; i++)
 			{
@@ -303,7 +303,7 @@ namespace SourceGrid
 
 		public RangeRegion Exclude(RangeRegion pRange)
 		{
-			RangeRegion excludedRange = new RangeRegion(this);
+			RangeRegion excludedRange = new SourceGrid.RangeRegion(this);
 			if (excludedRange.IsEmpty() == false)
 			{
 				for (int rToCheck = 0; rToCheck < pRange.m_RangeCollection.Count; rToCheck++)
@@ -323,7 +323,7 @@ namespace SourceGrid
 		/// </summary>
 		public void Clear()
 		{
-			Remove(new RangeRegion(this));
+			Remove(new SourceGrid.RangeRegion(this));
 		}
 
 		/// <summary>
@@ -332,7 +332,7 @@ namespace SourceGrid
 		/// <param name="pRangeToLeave"></param>
 		public void Clear(Range pRangeToLeave)
 		{
-			RangeRegion region = new RangeRegion(this);
+			RangeRegion region = new SourceGrid.RangeRegion(this);
 			region.Remove(pRangeToLeave);
 			Remove(region);
 		}
@@ -354,7 +354,7 @@ namespace SourceGrid
 		/// <returns>Returns true if sucesfully added</returns>
 		public bool Add(Position pCell)
 		{
-			return Add(new Range(pCell));
+			return Add(new SourceGrid.Range(pCell));
 		}
 
 		/// <summary>
@@ -364,7 +364,7 @@ namespace SourceGrid
 		/// <returns>Returns true if sucesfully removed</returns>
 		public bool Remove(Position pCell)
 		{
-			return Remove(new Range(pCell));
+			return Remove(new SourceGrid.Range(pCell));
 		}
 
 		/// <summary>
@@ -374,7 +374,7 @@ namespace SourceGrid
 		/// <returns>Returns true if sucesfully added</returns>
 		public bool Add(Range pRange)
 		{
-			return InternalAdd(new RangeRegion(pRange));
+			return InternalAdd(new SourceGrid.RangeRegion(pRange));
 		}
 
 		/// <summary>
@@ -384,7 +384,7 @@ namespace SourceGrid
 		/// <returns>Returns true if sucesfully removed</returns>
 		public bool Remove(Range pRange)
 		{
-			return InternalRemove(new RangeRegion(pRange));
+			return InternalRemove(new SourceGrid.RangeRegion(pRange));
 		}
 
 		/// <summary>
@@ -417,9 +417,9 @@ namespace SourceGrid
 			if (Contains(pRange))
 				return true;
 
-			if (pRange.Contains(this)) //change all the contents with the new range
+			if (pRange.Contains(this)) //change all the contents with the new SourceGrid.Range
 			{
-				RangeRegion existingRange = new RangeRegion(this);
+				RangeRegion existingRange = new SourceGrid.RangeRegion(this);
 
 				m_RangeCollection.Clear();
 				m_RangeCollection.AddRange(pRange.m_RangeCollection);
@@ -433,7 +433,7 @@ namespace SourceGrid
 					return true; //il range è vuoto
 				pRange.m_bValidated = true;
 
-				RangeRegionCancelEventArgs e = new RangeRegionCancelEventArgs(pRange);
+				RangeRegionCancelEventArgs e = new SourceGrid.RangeRegionCancelEventArgs(pRange);
 				OnAddingRange(e); //calling this method the range can change
 				if (e.Cancel)
 					return false;
@@ -452,7 +452,7 @@ namespace SourceGrid
 				}
 			}
 
-			OnAddedRange(new RangeRegionCancelEventArgs(pRange));
+			OnAddedRange(new SourceGrid.RangeRegionCancelEventArgs(pRange));
 
 			m_bValidated = false;
 
@@ -471,7 +471,7 @@ namespace SourceGrid
 				return true; //il range non è presente
 			pRange.m_bValidated = true;
 
-			RangeRegionCancelEventArgs e = new RangeRegionCancelEventArgs(pRange);
+			RangeRegionCancelEventArgs e = new SourceGrid.RangeRegionCancelEventArgs(pRange);
 			OnRemovingRange(e); //calling this method the range can change
 			if (e.Cancel)
 				return false;
@@ -515,14 +515,14 @@ namespace SourceGrid
 			if (AddedRange != null)
 				AddedRange(this, e);
 
-			OnChanged(new RangeRegionChangedEventArgs(e.RangeRegion, null));
+			OnChanged(new SourceGrid.RangeRegionChangedEventArgs(e.RangeRegion, null));
 		}
 		public virtual void OnRemovedRange(RangeRegionEventArgs e)
 		{
 			if (RemovedRange != null)
 				RemovedRange(this, e);
 
-			OnChanged(new RangeRegionChangedEventArgs(null, e.RangeRegion));
+			OnChanged(new SourceGrid.RangeRegionChangedEventArgs(null, e.RangeRegion));
 		}
 
 		public virtual void OnChanged(RangeRegionChangedEventArgs e)
@@ -546,8 +546,8 @@ namespace SourceGrid
 		}
 
 
-		#region ICollection<Range> Members
-		void ICollection<Range>.Add(Range item)
+		#region ICollection<SourceGrid.Range> Members
+		void ICollection<SourceGrid.Range>.Add(Range item)
 		{
 			this.Add(item);
 		}
@@ -569,9 +569,9 @@ namespace SourceGrid
 
 		#endregion
 
-		#region IEnumerable<Range> Members
+		#region IEnumerable<SourceGrid.Range> Members
 
-		public IEnumerator<Range> GetEnumerator()
+		public IEnumerator<SourceGrid.Range> GetEnumerator()
 		{
 			return m_RangeCollection.GetEnumerator();
 		}

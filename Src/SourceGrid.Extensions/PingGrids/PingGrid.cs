@@ -14,8 +14,8 @@ namespace SourceGrid.Extensions.PingGrids
 		{
 			FixedRows = 1;
 			FixedColumns = 0;
-			
-			Controller.AddController(new PingGridCellController());
+
+            Controller.AddController(new PingGridCellController());
 			
 			this.DataSource = new EmptyPingSource();
 			SelectionMode = GridSelectionMode.Row;

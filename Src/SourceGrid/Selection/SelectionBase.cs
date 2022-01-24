@@ -139,7 +139,7 @@ namespace SourceGrid.Selection
 
 				if (newCellToFocus != null)
 				{
-                    
+
 					//Cell Focus Entering
 					Grid.Controller.OnFocusEntering(newCellContext, gotFocusEventArgs);
 					if (gotFocusEventArgs.Cancel)
@@ -167,7 +167,7 @@ namespace SourceGrid.Selection
 				//If there is a cell with the focus fire the focus leave events
 				if (IsActivePositionValid())
 				{
-					oldFocusRegion = new RangeRegion(ActivePosition);
+					oldFocusRegion = new SourceGrid.RangeRegion(ActivePosition);
 
 					//LostFocus Event Arguments
 					Cells.ICellVirtual oldCellFocus = Grid.GetCell(ActivePosition);
@@ -209,8 +209,8 @@ namespace SourceGrid.Selection
 				}
 
 				//Fire a change event
-				RangeRegion newFocusRegion = new RangeRegion(pCellToActivate);
-				OnSelectionChanged(new RangeRegionChangedEventArgs(newFocusRegion, oldFocusRegion));
+				RangeRegion newFocusRegion = new SourceGrid.RangeRegion(pCellToActivate);
+				OnSelectionChanged(new SourceGrid.RangeRegionChangedEventArgs(newFocusRegion, oldFocusRegion));
 
 				return success;
 			}
@@ -871,7 +871,7 @@ namespace SourceGrid.Selection
 			//if (rng.End.Column < Grid.FixedColumns)
 			//    end = new Position(end.Row, Grid.FixedColumns);
 
-			//return new Range(start, end);
+			//return new SourceGrid.Range(start, end);
 
 			return Grid.CompleteRange.Intersect(rng);
 		}

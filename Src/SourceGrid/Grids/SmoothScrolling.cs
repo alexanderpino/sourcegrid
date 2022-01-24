@@ -194,7 +194,7 @@ namespace SourceGrid
                 m_Grid.ActualFixedRows >= m_Grid.Rows.Count || m_Grid.ActualFixedColumns >= m_Grid.Columns.Count)
                 return Range.Empty;
 
-            Range range = new Range(m_Grid.ActualFixedRows, m_Grid.ActualFixedColumns,
+            Range range = new SourceGrid.Range(m_Grid.ActualFixedRows, m_Grid.ActualFixedColumns,
                 m_Grid.Rows.Count - 1, m_Grid.Columns.Count - 1);
             return range;
         }
@@ -262,7 +262,7 @@ namespace SourceGrid
 
             if (actualFixedRows > 0 && actualFixedColumns >= 0 && m_Grid.Columns.Count > 0 && 
                 m_Grid.ActualFixedRows <= m_Grid.Rows.Count && m_Grid.ActualFixedColumns < m_Grid.Columns.Count)
-                fixedTop = new Range(0, actualFixedColumns, actualFixedRows - 1, m_Grid.Columns.Count - 1);
+                fixedTop = new SourceGrid.Range(0, actualFixedColumns, actualFixedRows - 1, m_Grid.Columns.Count - 1);
 
             return fixedTop;
         }
@@ -276,7 +276,7 @@ namespace SourceGrid
 
             if (actualFixedColumns > 0 && actualFixedRows >= 0 && m_Grid.Rows.Count > 0 &&
                 m_Grid.ActualFixedRows < m_Grid.Rows.Count && m_Grid.ActualFixedColumns <= m_Grid.Columns.Count)
-                fixedLeft = new Range(actualFixedRows, 0, m_Grid.Rows.Count - 1, actualFixedColumns - 1);
+                fixedLeft = new SourceGrid.Range(actualFixedRows, 0, m_Grid.Rows.Count - 1, actualFixedColumns - 1);
             return fixedLeft;
         }
 
@@ -973,7 +973,7 @@ namespace SourceGrid
 
             int lastColumn = m_Grid.ActualFixedColumns - 1;
 
-            fixedLeft = new Range(m_FirstVisibleScrollableRow, firstCol, lastrow, lastColumn);
+            fixedLeft = new SourceGrid.Range(m_FirstVisibleScrollableRow, firstCol, lastrow, lastColumn);
 
             if (fixedLeft.IsEmpty())
             {
@@ -990,7 +990,7 @@ namespace SourceGrid
 
             using (GraphicsCache grCache = new GraphicsCache(e.Graphics, clientRectangle))
             {
-                m_Grid.OnRangePaint(new RangePaintEventArgs(m_Grid, grCache, fixedLeft),
+                m_Grid.OnRangePaint(new SourceGrid.RangePaintEventArgs(m_Grid, grCache, fixedLeft),
                     new Rectangle(0, 0, clipRectangle.Width, clipRectangle.Height));
             }
 
@@ -1022,7 +1022,7 @@ namespace SourceGrid
 
             int lastColumn = FindLastVisibleColumn(m_FirstVisibleScrollableColumn, clipRectangle.Right);
 
-            fixedTop = new Range(firstRow, m_FirstVisibleScrollableColumn, lastrow, lastColumn);
+            fixedTop = new SourceGrid.Range(firstRow, m_FirstVisibleScrollableColumn, lastrow, lastColumn);
 
             if (fixedTop.IsEmpty())
             {
@@ -1039,7 +1039,7 @@ namespace SourceGrid
 
             using (GraphicsCache grCache = new GraphicsCache(e.Graphics, clientRectangle))
             {
-                m_Grid.OnRangePaint(new RangePaintEventArgs(m_Grid, grCache, fixedTop),
+                m_Grid.OnRangePaint(new SourceGrid.RangePaintEventArgs(m_Grid, grCache, fixedTop),
                     new Rectangle(0, 0, clipRectangle.Width, clipRectangle.Height));
             }
             e.Graphics.ResetClip();
@@ -1057,7 +1057,7 @@ namespace SourceGrid
                 using (GraphicsCache grCache = new GraphicsCache(e.Graphics, clientRectangle))
                 {
                     Rectangle drawRectangle = m_Grid.RangeToRectangle(fixedTopLeft);
-                    m_Grid.OnRangePaint(new RangePaintEventArgs(m_Grid, grCache, fixedTopLeft),
+                    m_Grid.OnRangePaint(new SourceGrid.RangePaintEventArgs(m_Grid, grCache, fixedTopLeft),
                         drawRectangle);
                 }
             }
@@ -1081,7 +1081,7 @@ namespace SourceGrid
 
             int lastColumn = FindLastVisibleColumn(m_FirstVisibleScrollableColumn, clipRectangle.Right);
 
-            range = new Range(m_FirstVisibleScrollableRow, m_FirstVisibleScrollableColumn, lastrow, lastColumn);
+            range = new SourceGrid.Range(m_FirstVisibleScrollableRow, m_FirstVisibleScrollableColumn, lastrow, lastColumn);
 
             if (range.IsEmpty()) 
                 return;
@@ -1096,7 +1096,7 @@ namespace SourceGrid
 
             using (GraphicsCache grCache = new GraphicsCache(e.Graphics, clientRectangle))
             {
-                m_Grid.OnRangePaint(new RangePaintEventArgs(m_Grid, grCache, range),
+                m_Grid.OnRangePaint(new SourceGrid.RangePaintEventArgs(m_Grid, grCache, range),
                     new Rectangle(0, 0, clipRectangle.Width, clipRectangle.Height));
             }
 
